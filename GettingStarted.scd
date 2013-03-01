@@ -29,6 +29,21 @@ s.reboot;
 //Now lets try using a Line Generator with a Saw
 {LFSaw.ar(XLine.kr(1,1000,5,doneAction:2),0,0.2)}.play;
 
-
-{Blip.ar(440,100,0.3)}.play;
+//Bandpass Limited Impule Generator
 { Blip.ar(XLine.kr(20000,200,6),100,0.2) }.play;
+
+
+//Two Saws and a LowPass filter
+(
+{
+    BLowPass.ar(
+		Mix.ar(LFSaw.ar([440,460],0,0.1)),
+        MouseX.kr(10, 20000, \exponential), // cutoff freq.
+        MouseY.kr(0.0, 1.0, \linear), // rq
+        0.5); // mul
+}.play
+)
+
+
+
+
